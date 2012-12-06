@@ -474,11 +474,13 @@ class fSMTP
 		$write    = NULL;
 		$except   = NULL;
 		
+//this bug covers MUCH more than just 5.2.0 etc - 5.1.6 has it too.
+//it's all about the hardware...		
 		// PHP 5.2.0 to 5.2.5 had a bug on amd64 linux where stream_select()
 		// fails, so we have to fake it - http://bugs.php.net/bug.php?id=42682
 		static $broken_select = NULL;
 		if ($broken_select === NULL) {
-			$broken_select = strpos(php_uname('m'), '64') !== FALSE && fCore::checkVersion('5.2.0') && !fCore::checkVersion('5.2.6');
+			$broken_select = strpos(php_uname('m'), '64') !== FALSE && fCore::checkVersion('5.1.0') && !fCore::checkVersion('5.2.6');
 		}
 		
 		// Fixes an issue with stream_select throwing a warning on PHP 5.3 on Windows
