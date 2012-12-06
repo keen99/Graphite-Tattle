@@ -1,4 +1,6 @@
-CREATE TABLE `users` (
+CREATE DATABASE IF NOT EXISTS tattle;
+#user/grant..
+CREATE TABLE IF NOT EXISTS `users` (
   `user_id` int(11) NOT NULL AUTO_INCREMENT,
   `username` varchar(100) NOT NULL,
   `email` varchar(200) NOT NULL,
@@ -9,7 +11,7 @@ CREATE TABLE `users` (
   UNIQUE KEY `email` (`email`)
 ) CHARSET=utf8;
 
-CREATE TABLE `settings` (
+CREATE TABLE IF NOT EXISTS `settings` (
   `name` varchar(100) NOT NULL,
   `friendly_name` varchar(200) NOT NULL,
   `value` varchar(500) NOT NULL,
@@ -20,7 +22,7 @@ CREATE TABLE `settings` (
   PRIMARY KEY (`name`,`owner_id`)
 ) CHARSET=utf8;
 
-CREATE TABLE `dashboards` (
+CREATE TABLE IF NOT EXISTS `dashboards` (
   `dashboard_id` int(11) NOT NULL AUTO_INCREMENT,
   `user_id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL,
@@ -34,7 +36,7 @@ CREATE TABLE `dashboards` (
   UNIQUE KEY `user_id` (`user_id`,`name`)
 ) CHARSET=utf8;
 
-CREATE TABLE `checks` (
+CREATE TABLE IF NOT EXISTS `checks` (
   `check_id` int(11) NOT NULL AUTO_INCREMENT,
   `user_id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL,
@@ -54,7 +56,7 @@ CREATE TABLE `checks` (
   UNIQUE KEY `user_id` (`user_id`,`name`)
 ) CHARSET=utf8;
 
-CREATE TABLE `check_results` (
+CREATE TABLE IF NOT EXISTS `check_results` (
   `result_id` int(11) NOT NULL AUTO_INCREMENT,
   `check_id` int(11) DEFAULT NULL,
   `status` int(11) DEFAULT NULL,
@@ -66,7 +68,7 @@ CREATE TABLE `check_results` (
   KEY `check_id` (`check_id`)
 ) CHARSET=utf8;
 
-CREATE TABLE `graphs` (
+CREATE TABLE IF NOT EXISTS `graphs` (
   `graph_id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
   `area` varchar(45) NOT NULL,
@@ -81,7 +83,7 @@ CREATE TABLE `graphs` (
   UNIQUE KEY `dashboard_id` (`dashboard_id`,`name`)
 ) CHARSET=utf8;
 
-CREATE TABLE `lines` (
+CREATE TABLE IF NOT EXISTS `lines` (
   `line_id` int(11) NOT NULL AUTO_INCREMENT,
   `color` varchar(45) DEFAULT NULL,
   `target` varchar(1000) NOT NULL DEFAULT '',
@@ -91,7 +93,7 @@ CREATE TABLE `lines` (
   UNIQUE KEY `graph_id` (`graph_id`,`alias`)
 ) CHARSET=utf8;
 
-CREATE TABLE `subscriptions` (
+CREATE TABLE IF NOT EXISTS `subscriptions` (
   `subscription_id` int(11) NOT NULL AUTO_INCREMENT,
   `check_id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
