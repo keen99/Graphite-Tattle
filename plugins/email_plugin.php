@@ -63,7 +63,7 @@ function email_plugin_notify($check,$check_result,$subscription,$alt_email=false
   $email->setSubject(str_replace('{check_name}', $check->prepareName(), sys_var('email_subject')));
   // Set the body to include a string containing UTF-8
   $state = $status_array[$check_result->getStatus()];
-  $email->setHTMLBody("<p>$state Alert for {$check->prepareName()} </p><p>The check returned {$check_result->prepareValue()}</p><p>Warning Threshold is : ". $check->getWarn() . "</p><p>Error Threshold is : ". $check->getError() . '</p><p>View Alert Details : <a href="' . fURL::getDomain() . '/' . CheckResult::makeURL('list',$check_result) . '">'.$check->prepareName()."</a></p>");
+  $email->setHTMLBody("<p>$state Alert for {$check->prepareName()} </p><p>The check returned {$check_result->prepareValue()}</p><p>Warning Threshold is : ". $check->getWarn() . "</p><p>Error Threshold is : ". $check->getError() . '</p><p>View Alert Details : <a href="' . fURL::getDomain() . CheckResult::makeURL('list',$check_result) . '">'.$check->prepareName()."</a></p>");
   $email->setBody("
   $state Alert for {$check->prepareName()}
 The check returned {$check_result->prepareValue()}
