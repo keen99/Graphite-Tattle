@@ -19,7 +19,10 @@ $alert_count_query = 'SELECT count(distinct c.check_id) as count '.
 $alert_count_results = $mysql_db->query($alert_count_query);
 $alert_count = $alert_count_results->fetchScalar();
 $results = NULL;
-if ($alert_count > $GLOBALS['PAGE_SIZE']) {
+// if alert count is lets than PAGE_SIZE, we just throw an error.
+// so for now lets not.
+// Fatal error: Call to a member function tossIfNoRows() on a non-object in /var/www/tattle/inc/views/index.php on line 6
+//if ($alert_count > $GLOBALS['PAGE_SIZE']) {
 
     //We need to get both the current page and a count to determine whether paging is needed.
     $latest_alerts = 'SELECT c.check_id,name,r.status,count(c.check_id) as count, r.timestamp '.
@@ -35,6 +38,6 @@ if ($alert_count > $GLOBALS['PAGE_SIZE']) {
                      'OFFSET ' . $offset . ';';
 
     $results = $mysql_db->query($latest_alerts);
-}
+//}
 
 include 'inc/views/index.php';
